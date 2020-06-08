@@ -12,11 +12,15 @@ read num_mac_addr
 
 counter_mac_addr=0
 
-while [ ${counter_mac_addr} -lt ${num_mac_addr} ]
-do
-        counter_mac_addr_hex="0x${counter_mac_addr}"
-        let result=$(( $mac_address_hex + $counter_mac_addr_hex))
-        ((counter_mac_addr++))
-        x=$( printf "%x" $result )
-        echo $x | awk '{gsub(/..\B/,"&:")}1'
-done
+if [[ $mac_address_hex -ge 0x0 ]] && [ $(( $mac_address_hex + $num_mac_addr )) -le 281474976710655 ]; then
+        while [ ${counter_mac_addr} -lt ${num_mac_addr} ]
+        do
+                counter_mac_addr_hex="0x${counter_mac_addr}"
+                let result=$(( $mac_address_hex + $counter_mac_addr_hex))
+                ((counter_mac_addr++))
+                x=$( printf "%x" $result )
+                echo $x | awk '{gsub(/..\B/,"&:")}1'
+        done
+else
+        echo "number out of range"
+fi
