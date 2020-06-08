@@ -17,5 +17,6 @@ do
         counter_mac_addr_hex="0x${counter_mac_addr}"
         let result=$(( $mac_address_hex + $counter_mac_addr_hex))
         ((counter_mac_addr++))
-        x=$( printf "%x" $result ) ; echo $x
+        x=$( printf "%x" $result )
+        echo $x | awk '{gsub(/..\B/,"&:")}1'
 done
