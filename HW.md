@@ -36,15 +36,15 @@ license.csv
 
 顯示 Joe Hwang ~ Kevin Lin 行
 
-
+` sed -n '/Joe Hwang/,/Kevin Lin/p' license.csv `
 
 顯示 Joe Hwang, Kevin Lin 行
 
-
+` sed -n -e '/Joe Hwang/p' -e '/Kevin Lin/p' license.csv `
 
 從頭顯示到 Tim Cheng 行
 
-
+` sed -n '1,/Kevin Lin/p' license.csv `
 
 求最後一欄位 總和跟平均
 
