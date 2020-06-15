@@ -48,7 +48,7 @@ license.csv
 
 求最後一欄位 總和跟平均
 
-
+` awk -F ',' 'BEGIN{SUM=0} {SUM+=$3} END {print "Sum:" SUM ", Avg.:" SUM/NR}' license.csv `
 
 ## 2020/06/01
 
