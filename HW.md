@@ -28,15 +28,27 @@ license.csv
 
 顯示 2~4 行
 
+` sed -n '2,4p' license.csv `
+
 顯示2, 4 行
+
+` sed -n -e '2p' -e '4p' license.csv `
 
 顯示 Joe Hwang ~ Kevin Lin 行
 
+
+
 顯示 Joe Hwang, Kevin Lin 行
+
+
 
 從頭顯示到 Tim Cheng 行
 
+
+
 求最後一欄位 總和跟平均
+
+
 
 ## 2020/06/01
 
