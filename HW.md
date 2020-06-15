@@ -8,11 +8,19 @@ echo /usr/lib/python/site-package/xxx-1.0/yyy.zz
 
 /usr/lib/python/site-package/xxx-1.0/yyy
 
+` echo /usr/lib/python/site-package/xxx-1.0/yyy.zz | sed 's/\(.*\)\.\(.*\)/\1/' `
+
 /usr/lib/python/site-package/xxx-1
+
+` echo /usr/lib/python/site-package/xxx-1.0/yyy.zz | sed -e 's/\(.*\)\.\(.*\)/\1/' -e 's/\(.*\)\.\(.*\)/\1/' `
 
 usr/lib/python/site-package/xxx-1.0/yyy.zz
 
+`echo /usr/lib/python/site-package/xxx-1.0/yyy.zz | sed 's/^\/\(.*\)/\1/' `
+
 yyy.zz
+
+` echo /usr/lib/python/site-package/xxx-1.0/yyy.zz | sed 's/\(.*\)\/\(.*\)/\2/ `
 
 #### 檔案處理
 
