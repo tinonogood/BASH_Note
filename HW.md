@@ -4,6 +4,8 @@
 
 搜尋 book 單字 (包括books book, books, ..)
 
+` grep -n -v "[a-z]book" book.txt | grep -v "book[a-rt-z]" `
+
 將 \n 換成 white space
 
 `  awk 1 ORS=' ' book.txt `
@@ -12,11 +14,15 @@
 
 不顯示 whiteline
 
+` grep -v "^$" nsswitch.conf `
+
 不顯示 comment (#)
 
-`  grep -v -e '^\#' nsswitch.conf `
+`  grep -v '^\#' nsswitch.conf `
 
-不顯示 white line  & comment
+不顯示 white line  & comment^
+
+` grep -v "^$\|^\#" nsswitch.conf `
 
 ### food.xml
 
@@ -25,6 +31,8 @@
 ` grep -P "<name>(.*)</name>" food.xml `
 
 搜尋 \<description> ... \</description>
+
+` sed -n "/<description>/,/<\/description>/p" food.xml `
 
 ` grep -P "<description>" -A 2 food.xml `
 
