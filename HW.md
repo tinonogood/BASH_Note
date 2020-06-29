@@ -1,3 +1,33 @@
+## 2020/06/15
+
+### book.txt
+
+搜尋 book 單字 (包括books book, books, ..)
+
+將 \n 換成 white space
+
+`  awk 1 ORS=' ' book.txt `
+
+### /etc/nsswitch.conf
+
+不顯示 whiteline
+
+不顯示 comment (#)
+
+`  grep -v -e '^\#' nsswitch.conf `
+
+不顯示 white line  & comment
+
+### food.xml
+
+搜尋 \<name> ... \</name>
+
+` grep -P "<name>(.*)</name>" food.xml `
+
+搜尋 \<description> ... \</description>
+
+` grep -P "<description>" -A 2 food.xml `
+
 ## 2020/06/08
 
 ### SED, AWK
