@@ -10,11 +10,13 @@
 
 ` chmod +x bar.sh`
 
+` vim run.sh `
+
 check [20200706_run.sh](./20200706_run.sh)
 
 ### press ctrl^c to show hello trap
 
-[20200706_run.sh](./20200706_run.sh)
+Check [20200706_ctrl_c_trap.sh](./20200706_ctrl_c_trap.sh)
 
 ## 2020/06/15
 
