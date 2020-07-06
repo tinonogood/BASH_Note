@@ -1,3 +1,17 @@
+## 2020/06/29
+
+### Call sh script wherever it is
+
+` mkdir foo`
+
+` cd foo`
+
+` echo "run bar" > bar.sh`
+
+` chmod +x bar.sh`
+
+check run.sh
+
 ## 2020/06/15
 
 ### book.txt
