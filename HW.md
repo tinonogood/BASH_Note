@@ -10,7 +10,11 @@
 
 ` chmod +x bar.sh`
 
-check run.sh
+check [20200706_run.sh](./20200706_run.sh)
+
+### press ctrl^c to show hello trap
+
+[20200706_run.sh](./20200706_run.sh)
 
 ## 2020/06/15
 
