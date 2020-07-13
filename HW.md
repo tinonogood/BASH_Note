@@ -1,3 +1,9 @@
+## 2020/07/06
+
+### Create script to add/del/list data in sqlite3 data
+
+
+
 ## 2020/06/29
 
 ### Call sh script wherever it is
