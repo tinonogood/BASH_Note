@@ -25,6 +25,9 @@ EOF
 }
 
 insert_customer() {
+read -p "Name?" name
+read -p "Phone?" phone
+
   local db_file=$1
   echo "no implement INSERT\r"
   sqlite3 $db_file << EOF
@@ -35,7 +38,12 @@ EOF
 }
 
 delete_customer() {
+read -p "Id?" id
   echo "no implement"
+  sqlite3 $db_file << EOF
+  DELETE FROM customers WHERE Id=$id;
+  .quit
+  EOF
 }
 
 list_customer() {
@@ -53,5 +61,22 @@ EOF
 
 echo "no implement Main\r"
 create_table
-insert_customer
-list_customer
+
+select OPT in "${OPTIONS[@]}" "quit"; do
+  case "$REPLY" in
+    1 )
+      add
+      main_menu
+    ;;
+    2 )
+      del
+      main_menu
+    ;;
+    3 )
+      list_data
+      main_menu
+    ;;
+   4  ) echo "Exiting!"; break;;
+    *) echo "Invalid option. Try another one.";continue;;
+  esac
+done
