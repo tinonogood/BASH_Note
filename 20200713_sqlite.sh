@@ -1,82 +1,87 @@
 #!/bin/bash
-
-###
-### var
-###
-
+TITLE="Select file menu"
 DB_FILE=test.sql
-OPTIONS=(add del list quit)
+PROMPT="Pick a task:"
+OPTIONS=("show table form" "add" "del" "list data")
 
-###
-### func
-###
-
-create_table() {
-  local db_file=$1
-  sqlite3 $db_file << EOF
-CREATE TABLE customers (
-  Id     INTEGER PRIMARY KEY   AUTOINCREMENT,
-  Name   VARCHAR(50),
-  Phone  VARCHAR(20)
-);
-PRAGMA table_info(customers);
+show_table_form () {
+sqlite3 $DB_FILE << EOF
+.schema customers
 .quit
 EOF
+echo "----------------------------------------"
 }
 
-insert_customer() {
-read -p "Name?" name
-read -p "Phone?" phone
+add () {
+echo "Please enter Name:"
+read -p "Name = " name
+echo "Please enter Phone:"
+read -p "Phone = " phone
 
-  local db_file=$1
-  echo "no implement INSERT\r"
-  sqlite3 $db_file << EOF
-INSERT INTO customers (Name ,Phone)
-VALUES( Tino,   0988123456);
+sqlite3 $DB_FILE << EOF
+INSERT INTO customers (Name,Phone)
+VALUES ('$name','$phone');
 .quit
 EOF
+echo "----------------------------------------"
+
 }
 
-delete_customer() {
-read -p "Id?" id
-  echo "no implement"
-  sqlite3 $db_file << EOF
-  DELETE FROM customers WHERE Id=$id;
-  .quit
-  EOF
-}
+del () {
+echo "Please enter Id you want to delete:"
+read -p "Id = " id
 
-list_customer() {
-  local db_file=$1
-  sqlite3 $db_file << EOF
-.tables customers
+sqlite3 $DB_FILE << EOF
+DELETE FROM customers WHERE Id=$id;
 .quit
 EOF
-  echo "no implement"
+echo "----------------------------------------"
+
 }
 
-###
-### main
-###
+list_data () {
+echo "----------------------------------------"
+sqlite3 $DB_FILE << EOF
+.header on
+.mode column
+SELECT * FROM customers;
+.quit
+EOF
+echo "----------------------------------------"
+}
 
-echo "no implement Main\r"
-create_table
+function main_menu() {
+  echo "${TITLE}"
+  PS3="${PROMPT} "
+  select OPT in "${OPTIONS[@]}" "quit"; do
+    case "$REPLY" in
+      1 )
+        show_table_form
+        main_menu
+        break
+      ;;
+      2 )
+        add
+        main_menu
+        break
+      ;;
+      3 )
+        del
+        main_menu
+        break
+      ;;
+      4 )
+        list_data
+        main_menu
+        break
+      ;;
+      $(( ${#OPTIONS[@]}+1 )) )
+              echo "Exiting!"
+              break
+      ;;
+      *) echo "Invalid option. Try another one.";continue;;
+    esac
+  done
+}
 
-select OPT in "${OPTIONS[@]}" "quit"; do
-  case "$REPLY" in
-    1 )
-      add
-      main_menu
-    ;;
-    2 )
-      del
-      main_menu
-    ;;
-    3 )
-      list_data
-      main_menu
-    ;;
-   4  ) echo "Exiting!"; break;;
-    *) echo "Invalid option. Try another one.";continue;;
-  esac
-done
+main_menu
