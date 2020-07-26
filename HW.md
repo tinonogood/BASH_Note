@@ -1,3 +1,9 @@
+## 2020/07/13
+
+### Use last HW with dialog
+
+check [20200727_dialog.sh](./20200727_dialog.sh)
+
 ## 2020/07/06
 
 ### Create script to add/del/list data in sqlite3 data
