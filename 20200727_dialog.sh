@@ -14,49 +14,49 @@ OPTIONS3="del"
 OPTIONS4="list data"
 
 
-show_table_form () {
-sqlite3 $DB_FILE << EOF>"SQLOUT"
-.schema customers
-.quit
-EOF
-MSG=$(cat SQLOUT)
-dialog --title "$OPTIONS1" --msgbox "$MSG" 10 60
-rm -f SQLOUT
+function show_table_form () {
+  sqlite3 $DB_FILE << EOF>"SQLOUT"
+  .schema customers
+  .quit
+  EOF
+  MSG=$(cat SQLOUT)
+  dialog --title "$OPTIONS1" --msgbox "$MSG" 10 60
+  rm -f SQLOUT
 }
 
-add () {
-echo "Please enter Name:"
-read -p "Name = " name
-echo "Please enter Phone:"
-read -p "Phone = " phone
+function add () {
+  echo "Please enter Name:"
+  read -p "Name = " name
+  echo "Please enter Phone:"
+  read -p "Phone = " phone
 
-sqlite3 $DB_FILE << EOF
-INSERT INTO customers (Name,Phone)
-VALUES ('$name','$phone');
-.quit
-EOF
+  sqlite3 $DB_FILE << EOF
+  INSERT INTO customers (Name,Phone)
+  VALUES ('$name','$phone');
+  .quit
+  EOF
 }
 
-del () {
-echo "Please enter Id you want to delete:"
-read -p "Id = " id
+function del () {
+  echo "Please enter Id you want to delete:"
+  read -p "Id = " id
 
-sqlite3 $DB_FILE << EOF
-DELETE FROM customers WHERE Id=$id;
-.quit
-EOF
+  sqlite3 $DB_FILE << EOF
+  DELETE FROM customers WHERE Id=$id;
+  .quit
+  EOF
 }
 
-list_data () {
-sqlite3 $DB_FILE << EOF>"SQLOUT"
-.header on
-.mode column
-SELECT * FROM customers;
-.quit
-EOF
-MSG=$(cat SQLOUT)
-dialog --title "$OPTIONS4" --msgbox "$MSG" 10 60
-rm -f SQLOUT
+function list_data () {
+  sqlite3 $DB_FILE << EOF>"SQLOUT"
+  .header on
+  .mode column
+  SELECT * FROM customers;
+  .quit
+  EOF
+  MSG=$(cat SQLOUT)
+  dialog --title "$OPTIONS4" --msgbox "$MSG" 10 60
+  rm -f SQLOUT
 }
 
 
