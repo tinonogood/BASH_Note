@@ -15,13 +15,13 @@ OPTIONS4="list data"
 
 
 function show_table_form () {
-  sqlite3 $DB_FILE << EOF>"SQLOUT"
-  .schema customers
-  .quit
-  EOF
-  MSG=$(cat SQLOUT)
-  dialog --title "$OPTIONS1" --msgbox "$MSG" 10 60
-  rm -f SQLOUT
+sqlite3 $DB_FILE << EOF>"SQLOUT"
+.schema customers
+.quit
+EOF
+MSG=$(cat SQLOUT)
+dialog --title "$OPTIONS1" --msgbox "$MSG" 10 60
+rm -f SQLOUT
 }
 
 function add () {
